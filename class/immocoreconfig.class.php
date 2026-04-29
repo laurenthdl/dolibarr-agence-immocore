@@ -9,11 +9,11 @@ class ImmoCoreConfig extends CommonObject
     public $table_element = 'llx_immo_config';
     public $element = 'immocore';
 
-    public string $ref = '';
-    public int $fk_user_creat;
-    public string $datec = '';
-    public string $tms = '';
-    public int $status;
+    public $ref = '';
+    public $fk_user_creat;
+    public $datec = '';
+    public $tms = '';
+    public $status;
 
     protected array $fields = array(
         'rowid' => array('type' => 'integer', 'label' => 'ID', 'enabled' => 1, 'visible' => -1, 'notnull' => 1, 'index' => 1, 'position' => 10, 'comment' => 'Id'),
