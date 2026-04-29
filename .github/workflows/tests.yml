@@ -33,7 +33,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${ matrix.php-version }
+        php-version: ${{ matrix.php-version }}
         extensions: pdo, pdo_pgsql, mbstring, json
         coverage: xdebug
 
@@ -46,8 +46,8 @@ jobs:
 
     - name: Run PHPUnit tests
       run: |
-        if [ -f test/phpunit/ImmocoreTest.php ]; then
-          php test/phpunit/ImmocoreTest.php
+        if [ -f test/phpunit/ImmoCoreConfigTest.php ]; then
+          php test/phpunit/ImmoCoreConfigTest.php
         fi
       env:
         DB_TYPE: pgsql
