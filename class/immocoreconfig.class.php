@@ -9,7 +9,6 @@ class ImmoCoreConfig extends CommonObject
     public $table_element = 'llx_immo_config';
     public $element = 'immocore';
 
-    public int $rowid;
     public string $ref = '';
     public int $fk_user_creat;
     public string $datec = '';

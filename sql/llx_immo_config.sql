@@ -1,5 +1,5 @@
 -- Table immo_config
-CREATE TABLE IF NOT EXISTS {db_prefix}immo_config (
+CREATE TABLE IF NOT EXISTS llx_immo_config (
     rowid SERIAL PRIMARY KEY,
     ref VARCHAR(128) NOT NULL,
     fk_user_creat INTEGER NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS {db_prefix}immo_config (
 ) TABLESPACE pg_default;
 
 -- Indexes
-CREATE INDEX IF NOT EXISTS idx_immo_config_ref ON {db_prefix}immo_config(ref);
-CREATE INDEX IF NOT EXISTS idx_immo_config_status ON {db_prefix}immo_config(status);
+CREATE INDEX IF NOT EXISTS idx_immo_config_ref ON llx_immo_config(ref);
+CREATE INDEX IF NOT EXISTS idx_immo_config_status ON llx_immo_config(status);
 
 -- Trigger for tms
 CREATE OR REPLACE FUNCTION update_tms_column()
@@ -21,8 +21,8 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
-DROP TRIGGER IF EXISTS trg_immo_config_tms ON {db_prefix}immo_config;
+DROP TRIGGER IF EXISTS trg_immo_config_tms ON llx_immo_config;
 CREATE TRIGGER trg_immo_config_tms
-    BEFORE UPDATE ON {db_prefix}immo_config
+    BEFORE UPDATE ON llx_immo_config
     FOR EACH ROW
     EXECUTE FUNCTION update_tms_column();
