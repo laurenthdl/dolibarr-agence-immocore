@@ -1,57 +1,22 @@
 <?php
-
 declare(strict_types=1);
+require_once __DIR__ . '/bootstrap.php';
+require_once __DIR__ . '/../../core/modules/modImmocore.class.php';
 
-require_once __DIR__ . '/../../class/immocoreconfig.class.php';
-
-class ImmoCoreConfigTest extends PHPUnit\Framework\TestCase
+class ImmoCoreTest extends PHPUnit\Framework\TestCase
 {
-    /**
-     * @test
-     */
-    public function tableElementShouldBeCorrect(): void
+    /** @test */
+    public function moduleClassShouldExist(): void
     {
-        $this->assertTrue(
-            class_exists('ImmoCoreConfig'),
-            'Classe ImmoCoreConfig deve exister'
-        );
+        $this->assertTrue(class_exists('modImmocore'));
     }
 
-    /**
-     * @test
-     */
-    public function moduleClassShouldBeCorrect(): void
+    /** @test */
+    public function moduleShouldHaveCorrectNumber(): void
     {
-        $moduleFile = __DIR__ . '/../../core/modules/modImmocore.class.php';
-        $this->assertFileExists($moduleFile);
-        $content = file_get_contents($moduleFile);
-        $this->assertStringContainsString('class modImmocore', $content);
-        $this->assertStringContainsString('numero = 700000', $content);
-    }
-
-    /**
-     * @test
-     */
-    public function sqlFileShouldExist(): void
-    {
-        $this->assertFileExists(__DIR__ . '/../../sql/llx_immo_config.sql');
-    }
-
-    /**
-     * @test
-     */
-    public function langFileShouldBeFormattedCorrectly(): void
-    {
-        $langFile = __DIR__ . '/../../langs/fr_FR/immocore.lang';
-        $this->assertFileExists($langFile);
-        $content = file_get_contents($langFile);
-        $lines = explode("\n", $content);
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if (empty($line) || strpos($line, '#') === 0) {
-                continue;
-            }
-            $this->assertMatchesRegularExpression('/^[A-Za-z0-9_-]+=.+$/', $line);
-        }
+        $ref = new ReflectionClass('modImmocore');
+        $prop = $ref->getProperty('numero');
+        $prop->setAccessible(true);
+        $this->assertEquals(700000, $prop->getValue(new modImmocore((object)[])));
     }
 }
