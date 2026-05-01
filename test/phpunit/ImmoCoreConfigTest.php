@@ -3,7 +3,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/../../core/modules/modImmocore.class.php';
 
-class ImmoCoreTest extends PHPUnit\Framework\TestCase
+class ImmoCoreConfigTest extends PHPUnit\Framework\TestCase
 {
     /** @test */
     public function moduleClassShouldExist(): void
